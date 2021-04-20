@@ -1,30 +1,31 @@
 import React,{useState} from 'react'
+import {connect} from 'react-redux'
 import { Form,Button } from 'react-bootstrap';
-import {useSelector,useDispatch} from "react-redux"
+// import {useSelector,useDispatch} from "react-redux"
 import Modal from "./Modal"
 
 
-function FormC() {
+function FormC(props) {
     const [name,setName] = useState("")
-    const isModalOpen = useSelector(state=>state.isModalOpen)
-    const dispatch = useDispatch()
-  
+    // const isModalOpen = useSelector(state=>state.isModalOpen)
+    // const dispatch = useDispatch()
   
   const handleAdd = (e) =>{
     e.preventDefault()
     if(name){
       const  newItem = {id : new Date().getTime().toString(),name}
-      dispatch({type:'ADD_ITEM',payload:newItem})
+      props.addPerson(newItem)
+      // dispatch({type:'ADD_ITEM',payload:newItem})
       setName('')
     }
     else{
-      dispatch({type:'NO_VALUE'})
+      props.noValue()
     }
   }
  
     return (
         <div>
-        {isModalOpen && <Modal/>}
+        {props.isModalOpen && <Modal/>}
         <Form onSubmit={handleAdd}> 
         <Form.Group controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
@@ -38,4 +39,20 @@ function FormC() {
     )
 }
 
-export default FormC
+const mapStateToProps = state =>{
+  return {
+      isModalOpen : state.isModalOpen,
+
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+
+  return {
+    addPerson : (newItem)=> dispatch({type:'ADD_ITEM',payload:newItem}),
+    noValue : ()=> dispatch({type:'NO_VALUE'})
+  }
+
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(FormC)
