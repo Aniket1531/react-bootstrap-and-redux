@@ -7,7 +7,7 @@ import {connect} from "react-redux"
 export class Modal extends Component {
 
   componentDidMount(){
-    console.log("this.prop",this.props)
+    
   setTimeout(()=>{
     this.props.closeModal() 
   }

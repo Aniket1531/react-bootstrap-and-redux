@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import FormC from "./FormC"
-import List from './List'
-
 
 
 class App extends Component {
@@ -10,24 +8,12 @@ class App extends Component {
     
       <section>
         <FormC />
-        <List />
+        
       </section>
     
     )
   }
 
 }
-
-// function App() {
-  
-//   return (
-    
-//       <section>
-//         <FormC />
-//         <List />
-//       </section>
-    
-//     )
-// }
 
 export default App

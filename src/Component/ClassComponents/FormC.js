@@ -3,21 +3,24 @@ import {connect} from 'react-redux'
 import { Form,Button } from 'react-bootstrap';
 // import {useSelector,useDispatch} from "react-redux"
 import Modal from "./Modal"
+import List from './List'
 
 class FormC extends Component {
     
    constructor(props){
     super(props)
-    
+      
       this.state  = {
         name : ""
       }
-    }
 
+    }
+    
     handleAdd = (e) =>{
 
     e.preventDefault()
-    
+    console.log("state",this.state)
+    console.log("prop",this.props)
     const name = this.state.name
     if(name){
       const  newItem = {id : new Date().getTime().toString(),name}
@@ -46,23 +49,26 @@ class FormC extends Component {
         Add People
         </Button>
         </Form>
+        <List people ={this.props.people}  deletePerson={this.props.deletePerson}   />
         </div>
       </div>
     )
   }
 }
-const mapStateToProps = state =>{
-  return {
-      isModalOpen : state.isModalOpen,
+const mapStateToProps = (state) =>{
 
+  return {
+      isModalOpen : state.isModalOpen,                
+      people : state.people
   }
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = (dispatch) =>{
 
   return {
     addPerson : (newItem)=> dispatch({type:'ADD_ITEM',payload:newItem}),
-    noValue : ()=> dispatch({type:'NO_VALUE'})
+    noValue : ()=> dispatch({type:'NO_VALUE'}),
+    deletePerson : (person)=>{dispatch({type:"REMOVE_ITEM",payload:person})}
   }
 
 }
