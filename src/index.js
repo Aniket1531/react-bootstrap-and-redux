@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import NavbarC from './Component/Navbar';
-import App from './Component/App'
+import NavbarC from './Component/ClassComponents/Navbar';
+import App from './Component/ClassComponents/App'
 import {reducer} from "./reducer/reducer"
 import {Provider} from "react-redux"
 import { Container,Jumbotron} from 'react-bootstrap';
